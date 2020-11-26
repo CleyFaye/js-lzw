@@ -1,6 +1,6 @@
 {
   "name": "@cley_faye/js-lzw",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Pure JavaScript implementation of LZW compression",
   "scripts": {
     "test": "nyc mocha src/tests/**/*.test.ts",
