@@ -90,17 +90,4 @@ export class CodeDecompress {
     }
     return result;
   }
-
-  /**
-   * Decode multiple inputs code
-   */
-  public addInputs(codes: Array<number>): CodeSequence {
-    return codes.reduce<CodeSequence>(
-      (result, code) => {
-        const codeOutput = this.addInput(code);
-        return result.concat(codeOutput);
-      },
-      [],
-    );
-  }
 }
