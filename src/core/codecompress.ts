@@ -98,7 +98,7 @@ export class CodeCompress {
       }
       const addedIndex = this.dictionary.add(this.currentSequence);
       this.currentSequence = [this.currentSequence[this.currentSequence.length - 1]];
-      if (this.maxCodeValue !== undefined && addedIndex === this.maxCodeValue) {
+      if (this.maxCodeValue !== undefined && addedIndex > this.maxCodeValue) {
         this.dictionary.reset();
         return [newIndex, this.clearCode as number];
       }
