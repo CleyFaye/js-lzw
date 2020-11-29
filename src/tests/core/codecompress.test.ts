@@ -6,6 +6,7 @@ import {
   bytesFixtures,
   testForceReset as forceFixture,
 } from "./fixtures";
+import {getOutputFromByteFixture} from "./utils";
 
 const createCodeCompressBytes = (
   fixture: ByteFixture,
@@ -16,24 +17,11 @@ const createCodeCompressBytes = (
   useStop,
 );
 
-const getOutput = (fixture:ByteFixture, useReset: boolean, useStop: boolean): Array<number> => {
-  if (useReset) {
-    if (useStop) {
-      return fixture.outputStopReset;
-    }
-    return fixture.outputReset;
-  }
-  if (useStop) {
-    return fixture.outputStop;
-  }
-  return fixture.output;
-};
-
 const testFixtures = (prefixReset: boolean, useReset: boolean, useStop: boolean) => {
   bytesFixtures.forEach((fixture, id) => {
     it(`#${id}`, () => {
       const codeCompress = createCodeCompressBytes(fixture, useReset, useStop);
-      const output = getOutput(fixture, useReset, useStop);
+      const output = getOutputFromByteFixture(fixture, useReset, useStop);
       const compressed = [];
       if (prefixReset && codeCompress.clearCode !== undefined) {
         const outputCode = codeCompress.addInput(codeCompress.clearCode);
