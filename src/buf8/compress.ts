@@ -50,6 +50,19 @@ export class Compress {
     this.msb = msb;
   }
 
+  public static createBytesCompressor(
+    maxCodeValue?: number,
+    setStop?: boolean,
+    earlyChange?: boolean,
+    msb?: boolean,
+  ): Compress {
+    return new Compress(
+      CodeCompress.createSingleBytes(maxCodeValue, setStop),
+      earlyChange,
+      msb,
+    );
+  }
+
   public static compressBytes(
     input: Uint8Array,
     maxCodeValue?: number,
@@ -57,8 +70,9 @@ export class Compress {
     earlyChange?: boolean,
     msb?: boolean,
   ): Uint8Array {
-    const compress = new Compress(
-      CodeCompress.createSingleBytes(maxCodeValue, setStop),
+    const compress = Compress.createBytesCompressor(
+      maxCodeValue,
+      setStop,
       earlyChange,
       msb,
     );

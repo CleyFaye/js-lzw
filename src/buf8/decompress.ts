@@ -39,15 +39,29 @@ export class Decompress {
     this.msb = msb;
   }
 
+  public static createBytesDecompressor(
+    setReset?: boolean,
+    setStop?: boolean,
+    earlyChange?: boolean,
+    msb?: boolean,
+  ): Decompress {
+    return new Decompress(
+      CodeDecompress.createSingleBytes(setReset, setStop),
+      earlyChange,
+      msb,
+    );
+  }
+
   public static decompressBytes(
     input: Uint8Array,
-    maxCodeValue?: number,
+    setReset?: boolean,
     setStop?: boolean,
     earlyChange?: boolean,
     msb?: boolean,
   ): Uint8Array {
-    const decompress = new Decompress(
-      CodeDecompress.createSingleBytes(maxCodeValue, setStop),
+    const decompress = Decompress.createBytesDecompressor(
+      setReset,
+      setStop,
       earlyChange,
       msb,
     );

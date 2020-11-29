@@ -25,21 +25,16 @@ import {CodeSequence} from "./types";
 export class CodeDecompress {
   private dictionary: Dictionary;
   private lastCode?: number;
-  private maxCodeValue?: number;
 
-  private constructor(dictionary: Dictionary, maxCodeValue?: number) {
+  private constructor(dictionary: Dictionary) {
     this.dictionary = dictionary;
-    this.maxCodeValue = maxCodeValue;
   }
 
   public static createSingleBytes(
-    maxCodeValue?: number,
+    setReset = true,
     setStop = true,
   ): CodeDecompress {
-    return new CodeDecompress(
-      Dictionary.createSingleBytes(maxCodeValue !== undefined, setStop),
-      maxCodeValue,
-    );
+    return new CodeDecompress(Dictionary.createSingleBytes(setReset, setStop));
   }
 
   public get currentMaxCode(): number {
@@ -57,7 +52,7 @@ export class CodeDecompress {
    * In that case an empty array is returned.
    */
   public addInput(code: number): CodeSequence {
-    if (this.maxCodeValue !== undefined && code === this.dictionary.clearCode) {
+    if (code === this.dictionary.clearCode) {
       this.lastCode = undefined;
       this.dictionary.reset();
       return [];

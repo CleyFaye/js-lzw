@@ -31,7 +31,7 @@ export class Compress {
 
   public static createBytesCompressor(
     maxCodeValue?: number,
-    setStop = true,
+    setStop?: boolean,
   ): Compress {
     return new Compress(
       CodeCompress.createSingleBytes(maxCodeValue, setStop),
@@ -44,7 +44,7 @@ export class Compress {
   public static compressBytes(
     input: Array<number>,
     maxCodeValue?: number,
-    setStop = true,
+    setStop?: boolean,
   ): CodeSequence {
     const compressor = Compress.createBytesCompressor(maxCodeValue, setStop);
     const result = compressor.addInput(input);

@@ -27,18 +27,18 @@ export class Decompress {
   }
 
   public static createBytesDecompressor(
-    maxCodeValue?: number,
-    setStop = true,
+    setReset?: boolean,
+    setStop?: boolean,
   ): Decompress {
-    return new Decompress(CodeDecompress.createSingleBytes(maxCodeValue, setStop));
+    return new Decompress(CodeDecompress.createSingleBytes(setReset, setStop));
   }
 
   public static decompressBytes(
     input: CodeSequence,
-    maxCodeValue?: number,
+    setReset = true,
     setStop = true,
   ): Array<number> {
-    const decompressor = Decompress.createBytesDecompressor(maxCodeValue, setStop);
+    const decompressor = Decompress.createBytesDecompressor(setReset, setStop);
     return decompressor.addInput(input);
   }
 
