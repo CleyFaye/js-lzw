@@ -1,7 +1,4 @@
 {
-  "mocha.coverage": {
-    "enable": true
-  },
   "mocha.files.glob": "src/tests/**/*.test.ts",
   "mocha.requires": [
   ],
@@ -13,5 +10,9 @@
   ],
   "files.exclude": {
     "tsconfig.tsbuildinfo": true
+  },
+  "mocha.coverage": {
+    "enable": true,
+    "runAfterTest": true
   }
 }
