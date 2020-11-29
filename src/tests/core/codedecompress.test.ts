@@ -23,7 +23,6 @@ const testBytesDictionaryWith = (useReset: boolean, useStop: boolean) => {
           assert.fail("Max emitted code greater than max expected code");
         }
       }
-      console.log("DECOMP:", decompressed);
       assert.deepStrictEqual(decompressed, fixture.input);
       // This is mostly a getter test for coverage, no need to be extensive
       if (useReset && useStop) {
