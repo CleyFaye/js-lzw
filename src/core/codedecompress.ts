@@ -57,6 +57,9 @@ export class CodeDecompress {
       this.dictionary.reset();
       return [];
     }
+    if (code === this.dictionary.stopCode) {
+      return [];
+    }
     if (this.lastCode !== undefined) {
       const previousSequence = this.dictionary.get(this.lastCode);
       this.lastCode = code;
@@ -72,9 +75,6 @@ export class CodeDecompress {
       const result = currentSequence
         ? currentSequence
         : newSequence;
-      if (result[result.length - 1] === this.stopCode) {
-        result.length -= 1;
-      }
       return result;
     }
     this.lastCode = code;
