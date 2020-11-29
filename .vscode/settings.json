@@ -4,11 +4,12 @@
   },
   "mocha.files.glob": "src/tests/**/*.test.ts",
   "mocha.requires": [
-    "ts-node/register"
   ],
   "mocha.node_options": [
     "-r",
-    "esm"
+    "esm",
+    "-r",
+    "ts-node/register"
   ],
   "files.exclude": {
     "tsconfig.tsbuildinfo": true
