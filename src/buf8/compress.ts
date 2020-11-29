@@ -107,14 +107,14 @@ export class Compress {
         const clearOutput = this.codeCompress.addInput(this.codeCompress.clearCode);
         const dataOutput = this.codeCompress.addInput(inputCode);
         nextOutput = [
-          ...clearOutput ? clearOutput : [],
-          ...dataOutput ? dataOutput : [],
+          ...clearOutput,
+          ...dataOutput,
         ];
       } else {
         nextOutput = this.codeCompress.addInput(inputCode);
       }
       this.firstInput = false;
-      if (nextOutput === undefined) {
+      if (nextOutput.length === 0) {
         continue;
       }
       const newFieldWidth = bitsRequired(this.codeCompress.currentMaxCode);
@@ -145,14 +145,12 @@ export class Compress {
     const finalCodes = this.codeCompress.endInput();
     const result = new Uint8Array(bitsRequired(this.codeCompress.currentMaxCode) + 1);
     let cursor = 0;
-    if (finalCodes !== undefined) {
-      cursor = this.addToResult(
-        result,
-        cursor,
-        finalCodes,
-        bitsRequired(this.codeCompress.currentMaxCode),
-      );
-    }
+    cursor = this.addToResult(
+      result,
+      cursor,
+      finalCodes,
+      bitsRequired(this.codeCompress.currentMaxCode),
+    );
 
     if (this.nextBit !== 0) {
       this.nextByte <<= (BYTE_WIDTH - this.nextBit);

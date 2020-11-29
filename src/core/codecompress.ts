@@ -66,11 +66,12 @@ export class CodeCompress {
    * If an output code is available it is returned.
    *
    * @return
-   * If an array is returned it always contains either one or two code.
-   * If there's two code, the second is always the clear code.
-   * The clear code can not come first with two return values.
+   * The returned array always contain either zero, one or two codes.
+   * Zero means that the current input doesn't produce any output.
+   * Two means that a reset code was emitted fater this input.
+   * The reset code can never be the first of two values.
    */
-  public addInput(code: number): Array<number> | undefined {
+  public addInput(code: number): Array<number> {
     if (code === this.clearCode) {
       let result;
       if (this.currentSequence.length > 0) {
@@ -104,14 +105,15 @@ export class CodeCompress {
       }
       return [newIndex];
     }
+    return [];
   }
 
   /**
    * Close the input.
    *
-   * If an output code is needed, it is returned.
+   * The final output codes shall be returned at this point.
    */
-  public endInput(): Array<number> | undefined {
+  public endInput(): Array<number> {
     const result = [];
     if (this.currentSequence.length > 0) {
       const sequenceIndex = this.dictionary.find(this.currentSequence);
@@ -123,8 +125,6 @@ export class CodeCompress {
     if (this.stopCode !== undefined) {
       result.push(this.stopCode);
     }
-    return result.length === 0
-      ? undefined
-      : result;
+    return result;
   }
 }

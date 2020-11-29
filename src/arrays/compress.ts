@@ -49,9 +49,7 @@ export class Compress {
     const compressor = Compress.createBytesCompressor(maxCodeValue, setStop);
     const result = compressor.addInput(input);
     const endValue = compressor.endInput();
-    if (endValue !== undefined) {
-      result.push(...endValue);
-    }
+    result.push(...endValue);
     return result;
   }
 
@@ -62,9 +60,7 @@ export class Compress {
     return codes.reduce<Array<number>>(
       (result, code) => {
         const newValue = this.codeCompress.addInput(code);
-        if (newValue !== undefined) {
-          result.push(...newValue);
-        }
+        result.push(...newValue);
         return result;
       },
       [],
@@ -76,7 +72,7 @@ export class Compress {
    *
    * If a last output code is needed, it is returned here.
    */
-  public endInput(): Array<number> | undefined {
+  public endInput(): Array<number> {
     return this.codeCompress.endInput();
   }
 }
