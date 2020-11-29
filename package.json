@@ -22,7 +22,7 @@
     ],
     "exclude": [
       "Gruntfile.js",
-      "test/**/*"
+      "src/tests/**/*"
     ],
     "cache": false,
     "all": true
