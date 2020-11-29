@@ -1,0 +1,16 @@
+{
+  "mocha.coverage": {
+    "enable": true
+  },
+  "mocha.files.glob": "src/tests/**/*.test.ts",
+  "mocha.requires": [
+    "ts-node/register"
+  ],
+  "mocha.node_options": [
+    "-r",
+    "esm"
+  ],
+  "files.exclude": {
+    "tsconfig.tsbuildinfo": true
+  }
+}
